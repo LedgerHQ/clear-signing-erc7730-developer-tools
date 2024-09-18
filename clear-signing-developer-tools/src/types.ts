@@ -1,4 +1,3 @@
-// Main Schema
 interface ERC7730Schema {
   $schema: string;
   includes?: string;
@@ -7,7 +6,6 @@ interface ERC7730Schema {
   display: Display;
 }
 
-// Context
 interface Context {
   main: BindingContext;
 }
@@ -16,7 +14,7 @@ type BindingContext = ContractBindingContext | EIP712BindingContext;
 
 interface ContractBindingContext {
   contract: {
-    abi: ABI | string; // ABI can be an array or a URL
+    abi: ABI | string;
     deployments: Deployment[];
     addressMatcher?: string;
     factory?: FactoryConstraint;
@@ -34,19 +32,16 @@ interface EIP712BindingContext {
   };
 }
 
-// Deployment
 interface Deployment {
   chainId: number; // eip155 format
   address: string; // eip55 format
 }
 
-// Factory Constraint
 interface FactoryConstraint {
   deployments: Deployment[];
   deployEvent: string;
 }
 
-// Metadata
 interface Metadata {
   owner: string;
   info: OwnerInfo;
@@ -57,8 +52,8 @@ interface Metadata {
 
 interface OwnerInfo {
   legalName: string;
-  lastUpdate: string; // date-time format
-  url: string; // uri format
+  lastUpdate: string;
+  url: string;
 }
 
 interface TokenDescription {
@@ -67,7 +62,6 @@ interface TokenDescription {
   decimals: number;
 }
 
-// Display
 interface Display {
   definitions: Record<string, FieldFormatter>;
   formats: Record<string, StructuredDataFormat>;
@@ -77,7 +71,7 @@ interface FieldFormatter {
   $id?: string;
   label: string;
   format: FieldFormat;
-  params?: Record<string, unknown>; // Optional parameters based on format
+  params?: Record<string, unknown>;
 }
 
 type FieldFormat =
@@ -92,7 +86,6 @@ type FieldFormat =
   | "unit"
   | "enum";
 
-// Structured Data Format
 interface StructuredDataFormat {
   $id?: string;
   intent: Intent;
@@ -101,21 +94,18 @@ interface StructuredDataFormat {
   screens?: Record<string, Screen[]>;
 }
 
-// Intent
 type Intent = string | Record<string, string>;
 
-// EIP712 Schema
 interface EIP712Schema {
   types: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    EIP712Domain: any[]; // Define as needed
+    EIP712Domain: any[];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any[]; // Additional types
+    [key: string]: any[];
   };
   primaryType: string;
 }
 
-// ABI
 type ABI = ABIEntry[];
 
 interface ABIEntry {
@@ -133,13 +123,11 @@ interface ABIParameter {
   components?: ABIParameter[];
 }
 
-// Enum
 type Enum = Record<string, string>;
 
-// Example of a Metafield
 interface Metafield {
   key: string;
   value: string;
   type: "string" | "number" | "boolean" | "date" | "json";
-  description?: string; // Optional
+  description?: string;
 }
