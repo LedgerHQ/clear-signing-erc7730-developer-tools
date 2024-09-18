@@ -1,5 +1,3 @@
-import { todo } from "node:test";
-
 // Main Schema
 interface ERC7730Schema {
   $schema: string;
